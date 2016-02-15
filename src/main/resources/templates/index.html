@@ -67,19 +67,25 @@
     <!-- Page Content -->
     <div class="container">
 		<div class="row word-container">
-			<div class="col-sm-8 col-md-5 col-md-offset-3 word" style="min-width: 270px;">
-				<div class="input-group input-group-lg">
-				  <span class="input-group-addon" id="sizing-addon1"></span>
-				  <input type="text" class="form-control" placeholder="Word" aria-describedby="sizing-addon1"></input>
-				  <span class="input-group-addon" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></span>
+			<form action="#" th:action="@{/addWord}" th:object="${seedStarter}" method="post">
+				<div class="col-sm-8 col-md-5 col-md-offset-3 word" style="min-width: 270px;">
+					<div class="input-group input-group-lg">
+					  <span class="input-group-addon" id="sizing-addon1"></span>
+					  <input type="text" class="form-control" placeholder="Word" name="word" aria-describedby="sizing-addon1"></input>
+					  <span class="input-group-addon" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></span>
+					</div>
 				</div>
-			</div>
-			<div class="col-sm-8 col-md-7 col-md-offset-2 meaning" style="min-width: 270px;">
-				<div class="input-group input-group-lg">
-				  <span class="input-group-addon" id="sizing-addon1"></span>
-				  <input type="text" class="form-control" placeholder="Meaning" aria-describedby="sizing-addon1"></input>
+				<div class="col-sm-8 col-md-7 col-md-offset-2 meaning" style="min-width: 270px;">
+					<div class="input-group input-group-lg">
+					  <span class="input-group-addon" id="sizing-addon1"></span>
+					  <input type="text" class="form-control" placeholder="Meaning" name="meaning" aria-describedby="sizing-addon1"></input>
+					</div>
+					<button type="submit" class="btn btn-primary btn-block word-submit btn-lg">Add Word</button>
 				</div>
-			</div>
+				
+				
+				
+			</form> 
 		</div>
     </div>
     <!-- /.container -->

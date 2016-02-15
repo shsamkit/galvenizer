@@ -12,7 +12,8 @@ public class WordDao {
 	JdbcTemplate jdbcTemplate;
 	
 	public Word getWord(String wordString){
-		String query = "SELECT * FROM wordTable where word = \""+wordString+"\"";
+		String query = "SELECT * FROM wordTable where word = '"+wordString+"'";
+		System.out.println("Executing:"+query);
 		Word word = jdbcTemplate.queryForObject(query, Word.class);
 		return word;
 	}
