@@ -45,7 +45,6 @@
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="#">GRE Galvenizer</a>
             </div>
@@ -53,13 +52,10 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">About</a>
+                        <a href="#">Revise</a>
                     </li>
                     <li>
-                        <a href="#">Services</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
+                        <a href="#">Decks</a>
                     </li>
                 </ul>
             </div>
@@ -70,16 +66,21 @@
 
     <!-- Page Content -->
     <div class="container">
-
-        <div class="row">
-            <div class="text-center word-container">
-            	<div class="input-group input-group-lg">
-				  <input type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon1"></input>
+		<div class="row word-container">
+			<div class="col-sm-8 col-md-5 col-md-offset-3 word" style="min-width: 270px;">
+				<div class="input-group input-group-lg">
+				  <span class="input-group-addon" id="sizing-addon1"></span>
+				  <input type="text" class="form-control" placeholder="Word" aria-describedby="sizing-addon1"></input>
+				  <span class="input-group-addon" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></span>
 				</div>
-            </div>
-        </div>
-        <!-- /.row -->
-
+			</div>
+			<div class="col-sm-8 col-md-7 col-md-offset-2 meaning" style="min-width: 270px;">
+				<div class="input-group input-group-lg">
+				  <span class="input-group-addon" id="sizing-addon1"></span>
+				  <input type="text" class="form-control" placeholder="Meaning" aria-describedby="sizing-addon1"></input>
+				</div>
+			</div>
+		</div>
     </div>
     <!-- /.container -->
 

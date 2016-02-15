@@ -1,3 +1,11 @@
 .word-container {
-	padding:10%;
+	padding-top:21%;
+}
+
+.word {
+	padding-bottom:3%;
+}
+
+.meaning {
+	padding-bottom:3%;
 }
