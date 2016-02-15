@@ -8,12 +8,21 @@ import com.gre.entities.Word;
 import com.gre.services.WordServices;
 
 @RestController
-public class test {
+public class ApiControllers {
 	@Autowired
 	WordServices wordService;
 	
-	@RequestMapping(value="/helloworld")
-	public Word helloWorld(Word word){
-		return word;
+	@RequestMapping(value="/searchWord")
+	public Word search(Word word){
+		wordService.addWord(word);
+		return wordService.search(word);
 	}
+	
+	@RequestMapping(value="/addWord")
+	public Word addWord(Word word){
+		wordService.addWord(word);
+		return wordService.search(word);
+	}
+	
+	
 }
