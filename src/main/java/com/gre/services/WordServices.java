@@ -1,7 +1,8 @@
 package com.gre.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.gre.entities.Word;
@@ -17,8 +18,13 @@ public class WordServices {
 	@Autowired
 	private WordWriter wordWriter;
 
-	public Word search(Word word){
-		return wordReader.search(word);
+	public ResponseEntity<Word> search(Word word){
+		try{
+				ResponseEntity<Word> responseEntity = new ResponseEntity<>(wordReader.search(word),HttpStatus.OK); 
+				return responseEntity;
+		} catch(Exception e) {
+			return new ResponseEntity<Word>(HttpStatus.NOT_FOUND);
+		}
 	}
 	
 	public Word addWord(Word word){

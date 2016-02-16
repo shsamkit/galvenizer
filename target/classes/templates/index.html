@@ -102,6 +102,11 @@
 		   $.ajax({
 	          dataType: "json",
 	          url: "search?word="+$(this).val(),
+	          statusCode: {
+	              204: function() {
+	                console.log("Word not found");
+	              }
+	          },
 	          error: function() {
 	             alert("Failed to connect to Search API");
 	          },
