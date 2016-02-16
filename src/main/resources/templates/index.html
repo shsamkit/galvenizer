@@ -71,7 +71,7 @@
 				<div class="col-sm-8 col-md-5 col-md-offset-3 word" style="min-width: 270px;">
 					<div class="input-group input-group-lg">
 					  <span class="input-group-addon" id="sizing-addon1"></span>
-					  <input type="text" class="form-control" placeholder="Word" name="word" aria-describedby="sizing-addon1"></input>
+					  <input type="text" class="form-control word-input" placeholder="Word" name="word" aria-describedby="sizing-addon1"></input>
 					  <span class="input-group-addon" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></span>
 					</div>
 				</div>
@@ -81,10 +81,7 @@
 					  <input type="text" class="form-control" placeholder="Meaning" name="meaning" aria-describedby="sizing-addon1"></input>
 					</div>
 					<button type="submit" class="btn btn-primary btn-block word-submit btn-lg">Add Word</button>
-				</div>
-				
-				
-				
+				</div>		
 			</form> 
 		</div>
     </div>
@@ -95,7 +92,11 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-
+	<script>
+		$( ".word-input" ).change(function() {
+			  alert( "Handler for .change() called." );
+			});
+	</script>
 </body>
 
 </html>

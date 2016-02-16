@@ -11,7 +11,8 @@ public class WordReader {
 	@Autowired
 	WordDao wordDao;
 	public Word search(Word word){
-		word = wordDao.getWord(word.getWord());
+		//word = wordDao.getWord(word.getWord());
+		word.setMeaning("to sap energy from");
 		return word;
 	}
 }
