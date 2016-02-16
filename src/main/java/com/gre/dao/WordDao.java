@@ -14,7 +14,6 @@ public class WordDao {
 	
 	public Word getWord(String wordString){
 		String query = "SELECT * FROM wordTable where word = '"+wordString+"'";
-		System.out.println("Executing:"+query);
 		return (Word)jdbcTemplate.queryForObject(query, new BeanPropertyRowMapper<Word>(Word.class));
 	}
 	

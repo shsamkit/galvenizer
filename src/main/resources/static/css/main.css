@@ -3,7 +3,7 @@
 }
 
 .word {
-	padding-bottom:3%;
+	padding-bottom:2%;
 }
 
 .meaning {
@@ -12,4 +12,8 @@
 
 .word-submit {
 	margin-top:6%;
+}
+
+.meaning-card {
+	background-color:red;
 }

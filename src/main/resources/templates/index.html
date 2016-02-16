@@ -67,20 +67,25 @@
     <!-- Page Content -->
     <div class="container">
 		<div class="row word-container">
-			<form action="#" th:action="@{/addWord}" th:object="${seedStarter}" method="post">
-				<div class="col-sm-8 col-md-5 col-md-offset-3 word" style="min-width: 270px;">
-					<div class="input-group input-group-lg">
-					  <span class="input-group-addon" id="sizing-addon1"></span>
-					  <input type="text" class="form-control word-input" placeholder="Word" name="word" aria-describedby="sizing-addon1"></input>
-					  <span class="input-group-addon" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></span>
+			<form action="#" class="new-word-form" th:action="@{/addWord}" th:object="${seedStarter}" method="post">
+				<div class="word-card">
+					<div class="col-sm-8 col-md-5 col-md-offset-3 word" style="min-width: 270px;">
+						<div class="input-group input-group-lg">
+						  <span class="input-group-addon" id="sizing-addon1"></span>
+						  <input type="text" class="form-control word-input" placeholder="Word" name="word" aria-describedby="sizing-addon1"></input>
+						  <span class="input-group-addon" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></span>
+						</div>
 					</div>
-				</div>
-				<div class="col-sm-8 col-md-7 col-md-offset-2 meaning" style="min-width: 270px;">
-					<div class="input-group input-group-lg">
-					  <span class="input-group-addon" id="sizing-addon1"></span>
-					  <input type="text" class="form-control" placeholder="Meaning" name="meaning" aria-describedby="sizing-addon1"></input>
+					<div class="existing-meanings">
+					
 					</div>
-					<button type="submit" class="btn btn-primary btn-block word-submit btn-lg">Add Word</button>
+					<div class="col-sm-8 col-md-7 col-md-offset-2 meaning" style="min-width: 270px;">
+						<div class="input-group input-group-lg">
+						  <span class="input-group-addon" id="sizing-addon1"></span>
+						  <input type="text" class="form-control meaning-input" placeholder="Meaning" name="new-meaning" aria-describedby="sizing-addon1"></input>
+						</div>
+						<button type="submit" class="btn btn-primary btn-block word-submit btn-lg">Add Word</button>
+					</div>
 				</div>		
 			</form> 
 		</div>
@@ -93,9 +98,35 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 	<script>
-		$( ".word-input" ).change(function() {
-			  alert( "Handler for .change() called." );
-			});
+		$(".word-input").change(function() {
+		   $.ajax({
+	          dataType: "json",
+	          url: "search?word="+$(this).val(),
+	          error: function() {
+	             alert("Failed to connect to Search API");
+	          },
+	          success: function(data){	 
+	        	  var existing_meaning = '<div class="col-sm-8 col-md-7 col-md-offset-2 well well-sm" style="min-width: 270px;"><div class="input-group input-group-lg"><h4>'+data["meaning"]+'</h4></div></div>';
+	        	  var parser = new DOMParser();
+	        	  var divElement = parser.parseFromString(existing_meaning, "text/xml");
+	        	  $(".existing-meanings").append(existing_meaning);
+	          }
+	        }); 
+		});
+		
+		$(".new-word-form").submit(function( event ) {
+			var $inputs = $('.new-word-form :input');
+			var validFlag = true;
+			if($(".word-input").val() == "" || $(".word-input").val() == null){
+				event.preventDefault();
+				return false;
+			}
+			if($(".meaning-input").val() == "" || $(".meaning-input").val() == null){
+				event.preventDefault();
+				return false;
+			}
+		    
+		});
 	</script>
 </body>
 
