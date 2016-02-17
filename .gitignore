@@ -64,3 +64,9 @@ local.properties
 
 # Security
 application.properties
+
+# others
+.mvn
+.mvn/*
+*m2*
+.m2/*
