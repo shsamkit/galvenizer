@@ -63,7 +63,6 @@ local.properties
 .springBeans
 
 # Security
-application.properties
 
 # others
 .mvn
