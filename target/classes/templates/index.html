@@ -47,7 +47,7 @@
 						<div class="input-group input-group-lg">
 						  <span class="input-group-addon" id="sizing-addon1"></span>
 						  <input type="text" class="form-control word-input" placeholder="Word" name="word" aria-describedby="sizing-addon1"></input>
-						  <span class="input-group-addon" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></span>
+						  <span class="input-group-addon cancel-word" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></span>
 						</div>
 					</div>
 					<div class="existing-meanings">
@@ -100,6 +100,9 @@
     <script src="js/bootstrap.min.js"></script>
 	<script>
 		$(".word-input").change(function() {
+			if (!this.value) {
+		        return;
+		    }
 		   $.ajax({
 	          dataType: "json",
 	          url: "search?word="+$(this).val(),
@@ -134,8 +137,53 @@
 				event.preventDefault();
 				return false;
 			}
-		    
+			var formData = {
+		            'word'              : $(".word-input").val(),
+		            'meaning'             : $(".meaning-input").val()
+		        };
+			var url = $(this).attr('action');
+			 var posting = $.post( url, formData );
+			 
+			  // Put the results in a div
+			  posting.done(function( data ) {
+				  $('.word-submit').removeClass( "btn-primary" );
+				  $('.word-submit').removeClass( "btn-danger" );
+				  $('.word-submit').addClass( "btn-success" );
+				  $('.word-submit').text('Done :) lets add the next one');
+				  $('.word-submit').prop('disabled', true);
+			  });
+			  
+			  posting.error(function( data ) {
+				  $('.word-submit').removeClass( "btn-primary" );
+				  $('.word-submit').addClass( "btn-danger" );
+				  $('.word-submit').text('Failed :( lets retry again..');
+			  });
+			event.preventDefault();
 		});
+		
+		$(".cancel-word").click(function(event) {
+			$(".word-input").val('');
+			$(".meaning-input").val('');
+			$(".existing-meanings").empty();
+			resetSubmit();
+		})
+		
+		$(".word-input").keyup(function() {
+		    if (!this.value) {
+		    	$(".existing-meanings").empty();
+		    	resetSubmit();
+		    }
+		});
+		
+		function resetSubmit(){
+			$('.word-submit').removeClass( "btn-success" );
+			$('.word-submit').removeClass( "btn-danger" );
+			$('.word-submit').addClass( "btn-primary" )
+			$('.word-submit').text('Add Word');
+			$('.word-submit').prop('disabled', false);
+		}
+		
+		
 	</script>
 </body>
 
