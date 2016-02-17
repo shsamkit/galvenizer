@@ -1,5 +1,7 @@
 package com.gre.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,18 +20,28 @@ public class WordServices {
 	@Autowired
 	private WordWriter wordWriter;
 
-	public ResponseEntity<Word> search(Word word){
+	public ResponseEntity<List<Word>> search(Word word){
 		try{
-				ResponseEntity<Word> responseEntity = new ResponseEntity<>(wordReader.search(word),HttpStatus.OK); 
-				return responseEntity;
+			List<Word> searchResult = wordReader.search(word);
+			if(searchResult.isEmpty()){
+				return new ResponseEntity<List<Word>>(HttpStatus.NO_CONTENT);	
+			}
+			return new ResponseEntity<>(searchResult,HttpStatus.OK); 
 		} catch(Exception e) {
-			return new ResponseEntity<Word>(HttpStatus.NOT_FOUND);
+			e.printStackTrace();
+			return new ResponseEntity<List<Word>>(HttpStatus.NOT_FOUND);
 		}
 	}
 	
-	public Word addWord(Word word){
-		wordWriter.write(word);
-		return word;
+	public ResponseEntity<String> addWord(Word word){
+		try{
+			return new ResponseEntity<>(wordWriter.write(word).toString(),HttpStatus.OK);
+		} catch(Exception e){
+			e.printStackTrace();
+			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+		}
+		
+		
 	}
 	
 }

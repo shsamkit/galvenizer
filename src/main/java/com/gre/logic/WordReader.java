@@ -1,20 +1,21 @@
 package com.gre.logic;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
 
-import com.gre.dao.WordDao;
 import com.gre.entities.Word;
+import com.gre.repository.WordRepository;
 
 @Component
 public class WordReader {
 	@Autowired
-	WordDao wordDao;
-	public Word search(Word word) throws Exception{
+	WordRepository wordRepository;
+	public List<Word> search(Word word) throws Exception{
 		try{
-			word = wordDao.getWord(word.getWord());
-			return word;
+			return wordRepository.findByWord(word.getWord());
 		}
 		catch(EmptyResultDataAccessException e){
 			throw new Exception(e);

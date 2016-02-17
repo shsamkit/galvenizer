@@ -1,5 +1,7 @@
 package com.gre.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,13 +17,14 @@ public class ApiControllers {
 	WordServices wordService;
 	
 	@RequestMapping(value="/search")
-	public ResponseEntity<Word> search(Word word){
+	public ResponseEntity<List<Word>> search(Word word){
 		return wordService.search(word);
 	}
 	
 	@RequestMapping(value="/addWord",method = RequestMethod.POST)
-	public Word addWord(Word word){
-		wordService.addWord(word);
-		return wordService.search(word).getBody();
+	public ResponseEntity<String> addWord(Word word){
+		System.out.println(word.toString());
+		return wordService.addWord(word);
+		
 	}
 }

@@ -1,8 +1,6 @@
 package com.gre.entities;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Version;
 
@@ -13,8 +11,7 @@ import lombok.Data;
 public class Word {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private String id;
 
     @Version
     private Integer version;
@@ -22,10 +19,10 @@ public class Word {
 	private String word;
     private String meaning;
     private String example;
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public Integer getVersion() {
@@ -52,5 +49,11 @@ public class Word {
 	public void setExample(String example) {
 		this.example = example;
 	}
+	@Override
+	public String toString() {
+		return "Word [id=" + id + ", version=" + version + ", word=" + word + ", meaning=" + meaning + ", example="
+				+ example + "]";
+	}
+	
     
 }
