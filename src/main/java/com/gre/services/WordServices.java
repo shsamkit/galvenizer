@@ -40,8 +40,15 @@ public class WordServices {
 			e.printStackTrace();
 			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
 		}
-		
-		
+	}
+	
+	public ResponseEntity<Integer> getWordCount(){
+		try{
+			return new ResponseEntity<>(wordReader.count(),HttpStatus.OK);
+		} catch(Exception e){
+			e.printStackTrace();
+			return new ResponseEntity<Integer>(HttpStatus.BAD_REQUEST);
+		}	
 	}
 	
 }

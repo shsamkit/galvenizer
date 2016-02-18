@@ -9,4 +9,6 @@ import com.gre.entities.Word;
 
 public interface WordRepository extends MongoRepository<Word, String> {
 	List<Word> findByWord(@Param("word") String word);
+	List<Word> findByWordNotNull();
+	int countByWordNotNull();
 }

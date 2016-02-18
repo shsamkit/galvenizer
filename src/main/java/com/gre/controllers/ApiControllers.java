@@ -27,4 +27,9 @@ public class ApiControllers {
 		return wordService.addWord(word);
 		
 	}
+	
+	@RequestMapping(value="/getCount",method = RequestMethod.GET)
+	public ResponseEntity<Integer> getWordCount(){
+		return wordService.getWordCount();
+	}
 }

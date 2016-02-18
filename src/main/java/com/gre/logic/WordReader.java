@@ -21,4 +21,13 @@ public class WordReader {
 			throw new Exception(e);
 		}
 	}
+	
+	public Integer count() throws Exception{
+		try{
+			return wordRepository.countByWordNotNull();
+		}
+		catch(EmptyResultDataAccessException e){
+			throw new Exception(e);
+		}
+	}
 }
