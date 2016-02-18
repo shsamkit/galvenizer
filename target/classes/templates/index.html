@@ -45,7 +45,7 @@
 				<div class="word-card">
 					<div class="col-sm-8 col-md-5 col-md-offset-3 word" style="min-width: 270px;">
 						<div class="input-group input-group-lg">
-						  <span class="input-group-addon" id="sizing-addon1"></span>
+						  <span class="input-group-addon meaning-loader" id="sizing-addon1"></span>
 						  <input type="text" class="form-control word-input" placeholder="Word" name="word" aria-describedby="sizing-addon1"></input>
 						  <span class="input-group-addon cancel-word" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></span>
 						</div>
@@ -55,7 +55,7 @@
 					</div>
 					<div class="col-sm-8 col-md-7 col-md-offset-2 meaning" style="min-width: 270px;">
 						<div class="input-group input-group-lg">
-						  <span class="input-group-addon" id="sizing-addon1"></span>
+						  <span class="input-group-addon meaning-uploader" id="sizing-addon1"></span>
 						  <input type="text" class="form-control meaning-input" placeholder="Meaning" name="meaning" aria-describedby="sizing-addon1"></input>
 						</div>
 						<button type="submit" class="btn btn-primary btn-block word-submit btn-lg">Add Word</button>
@@ -90,6 +90,7 @@
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
+            
         </div>
         <!-- /.container -->
     </nav>
@@ -103,6 +104,7 @@
 			if (!this.value) {
 		        return;
 		    }
+			meaningLoaderShow($(".meaning-loader"));
 		   $.ajax({
 	          dataType: "json",
 	          url: "search?word="+$(this).val(),
@@ -122,6 +124,9 @@
     	        	  var divElement = parser.parseFromString(existing_meaning, "text/xml");
     	        	  $(".existing-meanings").append(existing_meaning);
 	        	  });	    
+	          },
+	          complete: function() {
+	        	  meaningLoaderHide($(".meaning-loader"));
 	          }
 	        }); 
 		});
@@ -141,6 +146,7 @@
 		            'word'              : $(".word-input").val(),
 		            'meaning'             : $(".meaning-input").val()
 		        };
+			meaningLoaderShow($(".meaning-uploader"));
 			var url = $(this).attr('action');
 			 var posting = $.post( url, formData );
 			 
@@ -151,12 +157,14 @@
 				  $('.word-submit').addClass( "btn-success" );
 				  $('.word-submit').text('Done :) lets add the next one');
 				  $('.word-submit').prop('disabled', true);
+				  meaningLoaderHide($(".meaning-uploader"));
 			  });
 			  
 			  posting.error(function( data ) {
 				  $('.word-submit').removeClass( "btn-primary" );
 				  $('.word-submit').addClass( "btn-danger" );
 				  $('.word-submit').text('Failed :( lets retry again..');
+				  meaningLoaderHide($(".meaning-uploader"));
 			  });
 			event.preventDefault();
 		});
@@ -182,8 +190,17 @@
 			$('.word-submit').text('Add Word');
 			$('.word-submit').prop('disabled', false);
 		}
-		
-		
+	    
+	    function meaningLoaderShow(loaderParent){
+	    	var meaningLoader = document.createElement("img");
+	    	meaningLoader.src = "images/ajax-loader.gif";
+	    	loaderParent.append(meaningLoader);
+	    }
+	    
+	    function meaningLoaderHide(loaderParent){
+	    	loaderParent.empty();
+	    }
+
 	</script>
 </body>
 
