@@ -18,8 +18,8 @@ public class WordWriter {
 		if(word.getWord().isEmpty() || word.getMeaning().isEmpty()){
 			throw new Exception();
 		}
-		word.setWord(word.getWord().toLowerCase());
-		word.setMeaning(word.getMeaning().toLowerCase());
+		word.setWord(word.getWord().trim().toLowerCase());
+		word.setMeaning(word.getMeaning().trim().toLowerCase());
 		wordRepository.save(word);
 		return word;
 	}

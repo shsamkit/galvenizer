@@ -15,7 +15,7 @@ public class WordReader {
 	WordRepository wordRepository;
 	public List<Word> search(Word word) throws Exception{
 		try{
-			return wordRepository.findByWord(word.getWord());
+			return wordRepository.findByWord(word.getWord().trim().toLowerCase());
 		}
 		catch(EmptyResultDataAccessException e){
 			throw new Exception(e);
